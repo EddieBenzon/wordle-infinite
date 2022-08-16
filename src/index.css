@@ -436,13 +436,6 @@ h4 {
 /* Tablet */
 
 @media only screen and (max-width: 676px) {
-  .app,
-  .app-dark {
-    height: 100%;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-  }
-
   .header,
   .header-dark {
     flex-direction: column;
