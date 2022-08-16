@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import { solutions } from "./solutions";
+import Wordle from "./Components/Wordle";
+import { useGlobalContext } from "./Components/context";
 
 function App() {
+  const [solution, setSolution] = useState(null);
+  const { darkMode } = useGlobalContext();
+
+  useEffect(() => {
+    document.title = "Wordle Infinite";
+    const newSolution = solutions[Math.floor(Math.random() * solutions.length)];
+    setSolution(newSolution.toUpperCase());
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={darkMode ? "app-dark" : "app"}>
+      {solution && <Wordle solution={solution} />}
     </div>
   );
 }
