@@ -6,6 +6,7 @@ import GameGrid from "./GameGrid";
 import Keyboard from "./Keyboard";
 import HowToPlay from "./HowToPlay";
 import InvalidWord from "./InvalidWord";
+import { useGlobalContext } from "./context";
 
 const Wordle = ({ solution }) => {
   const {
@@ -22,7 +23,7 @@ const Wordle = ({ solution }) => {
   } = useWordle(solution);
   const [showModal, setShowModal] = useState(false);
   const [howTo, setHowTo] = useState(false);
-
+  const { darkMode } = useGlobalContext();
   useEffect(() => {
     window.addEventListener("keyup", handleKeyup);
     if (victory) {
@@ -47,7 +48,7 @@ const Wordle = ({ solution }) => {
       <Header howTo={howTo} setHowTo={setHowTo} />
       {showModal && <Modal victory={victory} solution={solution} />}
       {howTo && <HowToPlay howTo={howTo} setHowTo={setHowTo} />}
-      <div className="game-wrapper">
+      <div className={darkMode ? "game-wrapper-dark" : "game-wrapper"}>
         <GameGrid currentGuess={currentGuess} guesses={guesses} turn={turn} />
         <Keyboard
           usedKeys={usedKeys}
